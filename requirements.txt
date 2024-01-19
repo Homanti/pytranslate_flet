@@ -1,3 +1,2 @@
 googletrans
-flet
-os
+flet==0.19.0
