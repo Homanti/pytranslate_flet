@@ -70,4 +70,4 @@ def main(page: ft.Page):
     ]), ft.Row([dropLanguage, btnChange]))
 
 #ft.app(target=main)
-ft.app(target=main,view=ft.WEB_BROWSER)
+ft.app(target=main, view=ft.WEB_BROWSER, port=os.environ.get("PORT", 8080))
