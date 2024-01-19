@@ -1,6 +1,5 @@
 import googletrans
 from googletrans import Translator
-import logging
 import flet as ft
 import os
 
@@ -70,7 +69,5 @@ def main(page: ft.Page):
         lineMessage,
         lineTranslate,
     ]), ft.Row([dropLanguage, btnChange]))
-
-logging.basicConfig(level=logging.INFO)
 
 ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
