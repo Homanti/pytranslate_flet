@@ -4,6 +4,7 @@ import flet as ft
 import os
 
 selected_language = ''
+selected_language2 = ''
 
 def main(page: ft.Page):
     page.title = "PyTranslate"
@@ -15,27 +16,25 @@ def main(page: ft.Page):
         selected_language_code = dropLanguage.value
         if selected_language_code:
             selected_language = languages.get(selected_language_code)
-            Translation2()
+            Translation(1)
+
+    def SelectedLanguage2(e):
+        global selected_language2
+        selected_language_code2 = dropLanguage.value
+        if selected_language_code2:
+            selected_language2 = languages.get(selected_language_code2)
+            Translation(1)
 
     def Translation(e):
         if not lineMessage.value == '':
             if not selected_language == '':
-                answer = translator.translate(lineMessage.value, dest=selected_language)
-                lineTranslate.value = answer.text
-                page.update()
+                if not selected_language2 == '':
+                    answer = translator.translate(lineMessage.value, src=selected_language2, dest=selected_language)
+                    lineTranslate.value = answer.text
+                    page.update()
             else:
                 lineTranslate.value = ''
                 page.update()
-
-    def Translation2():
-        if not lineMessage.value == '':
-            if not selected_language == '':
-                answer = translator.translate(lineMessage.value, dest=selected_language)
-                lineTranslate.value = answer.text
-                page.update()
-        else:
-            lineTranslate.value = ''
-            page.update()
 
     languages = {value.title(): key for key, value in googletrans.LANGUAGES.items()}
 
@@ -43,6 +42,12 @@ def main(page: ft.Page):
 
     dropLanguage = ft.Dropdown(
         label="Вибрати мову на яку перекладати",
+        options=options,
+        on_change=SelectedLanguage2,
+    )
+
+    dropLanguage2 = ft.Dropdown(
+        label="Вибрати мову з якої перекладати",
         options=options,
         on_change=SelectedLanguage,
     )
@@ -54,9 +59,12 @@ def main(page: ft.Page):
         lineTranslate.value = lineMessagevalue
         lineMessage.value = lineTranslatevalue
 
-        a = translator.detect(lineTranslate.value)
+        dropLanguagevalue = dropLanguage.value
+        dropLanguage2value = dropLanguage2.value
+        
+        dropLanguage.value = dropLanguage2value
 
-        dropLanguage.value = googletrans.LANGUAGES[a.lang].capitalize()
+        dropLanguage2.value = dropLanguagevalue
 
         page.update()
 
@@ -68,6 +76,6 @@ def main(page: ft.Page):
     page.add(ft.Row([
         lineMessage,
         lineTranslate,
-    ]), ft.Row([dropLanguage, btnChange]))
+    ]), ft.Row([dropLanguage2, dropLanguage, btnChange]))
 
 ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
