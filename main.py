@@ -1,7 +1,6 @@
 import googletrans
 from googletrans import Translator
 import flet as ft
-import os
 
 selected_language = ''
 
@@ -70,4 +69,4 @@ def main(page: ft.Page):
         lineTranslate,
     ]), ft.Row([dropLanguage, btnChange]))
 
-ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
+ft.app(target=main, view=None, port=8502)
