@@ -40,9 +40,10 @@ def main(page: ft.Page):
         if not lineMessage.value == '':
             if not selected_language == '':
                 if not selected_language_from == '':
-                    answer = translate_text(lineMessage.value, selected_language, selected_language_from)
-                    lineTranslate.value = answer
-                    page.update()
+                    if not selected_language == '':
+                        answer = translate_text(lineMessage.value, selected_language, selected_language_from)
+                        lineTranslate.value = answer
+                        page.update()
         if lineMessage.value == '':
             lineTranslate.value = ''
             page.update()
@@ -108,31 +109,31 @@ def main(page: ft.Page):
                         selected_language_from = detect_language(lineMessage.value)
                         lineTranslatevalue = lineTranslate.value
                         lineMessagevalue = lineMessage.value
-        
+
                         lineTranslate.value = lineMessagevalue
                         lineMessage.value = lineTranslatevalue
-        
+
                         dropLanguage.value = langlist[selected_language_from].capitalize()
                         dropLanguage_from.value = langlist[selected_language].capitalize()
-        
+
                     else:
                         lineTranslatevalue = lineTranslate.value
                         lineMessagevalue = lineMessage.value
-        
+
                         dropLanguagevalue = dropLanguage.value
                         dropLanguage_fromvalue = dropLanguage_from.value
-        
+
                         lineTranslate.value = lineMessagevalue
                         lineMessage.value = lineTranslatevalue
-        
+
                         dropLanguage.value = dropLanguage_fromvalue
                         dropLanguage_from.value = dropLanguagevalue
-        
+
                     page.update()
 
     if page.width < 600: # для мобілок
-        lineTranslate = ft.TextField(label="Переклад", max_lines=5, read_only=True, min_lines=3)
-        lineMessage = ft.TextField(label="Введіть ваш текст", on_change=Translation, max_lines=5, min_lines=3)
+        lineTranslate = ft.TextField(label="Переклад", max_lines=5, read_only=True, min_lines=3, max_length=5000)
+        lineMessage = ft.TextField(label="Введіть ваш текст", on_change=Translation, max_lines=5, min_lines=3, max_length=5000)
         btnChange = ft.IconButton(icon=ft.icons.CHANGE_CIRCLE, on_click=change)
 
         dropLanguage = ft.Dropdown(
@@ -155,8 +156,8 @@ def main(page: ft.Page):
         ]), ft.Row([dropLanguage_from]), ft.Row([btnChange], alignment=ft.MainAxisAlignment.END), ft.Row([dropLanguage]))
 
     else:
-        lineTranslate = ft.TextField(label="Переклад", max_lines=5, expand=True, read_only=True, min_lines=3)
-        lineMessage = ft.TextField(label="Введіть ваш текст", on_change=Translation, max_lines=5, expand=True, min_lines=3)
+        lineTranslate = ft.TextField(label="Переклад", max_lines=5, expand=True, read_only=True, min_lines=3, max_length=5000)
+        lineMessage = ft.TextField(label="Введіть ваш текст", on_change=Translation, max_lines=5, expand=True, min_lines=3, max_length=5000)
         btnChange = ft.IconButton(icon=ft.icons.CHANGE_CIRCLE, on_click=change)
 
         dropLanguage = ft.Dropdown(
