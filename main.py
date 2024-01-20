@@ -8,6 +8,12 @@ selected_language_from = ''
 def main(page: ft.Page):
     page.title = "PyTranslate"
 
+    page.theme = ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary=ft.colors.BLUE,
+        ),
+    )
+
     def SelectedLanguage(e):
         global selected_language
         selected_language_code = dropLanguage.value
