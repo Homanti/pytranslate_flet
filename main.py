@@ -3,7 +3,7 @@ from func_translator import translate_text, detect_language
 import os
 
 selected_language = ''
-selected_language2 = ''
+selected_language_from = ''
 
 def main(page: ft.Page):
     page.title = "PyTranslate"
@@ -13,22 +13,20 @@ def main(page: ft.Page):
         selected_language_code = dropLanguage.value
         if selected_language_code:
             selected_language = languages.get(selected_language_code)
-            print(selected_language)
             Translation(1)
 
-    def SelectedLanguage2(e):
-        global selected_language2
-        selected_language_code2 = dropLanguage2.value
+    def SelectedLanguageFrom(e):
+        global selected_language_from
+        selected_language_code2 = dropLanguage_from.value
         if selected_language_code2:
-            selected_language2 = languages.get(selected_language_code2)
-            print(selected_language2)
+            selected_language_from = languages.get(selected_language_code2)
             Translation(1)
 
     def Translation(e):
         if not lineMessage.value == '':
             if not selected_language == '':
-                if not selected_language2 == '':
-                    answer = translate_text(lineMessage.value, selected_language, selected_language2)
+                if not selected_language_from == '':
+                    answer = translate_text(lineMessage.value, selected_language, selected_language_from)
                     lineTranslate.value = answer
                     page.update()
         if lineMessage.value == '':
@@ -37,43 +35,48 @@ def main(page: ft.Page):
 
     langlist = {'auto': 'Визначити мову', 'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian', 'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian', 'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa', 'zh-cn': 'chinese (simplified)', 'zh-tw': 'chinese (traditional)', 'co': 'corsican', 'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto', 'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian', 'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati', 'ht': 'haitian creole', 'ha': 'hausa', 'haw': 'hawaiian', 'iw': 'hebrew', 'he': 'hebrew', 'hi': 'hindi', 'hmn': 'hmong', 'hu': 'hungarian', 'is': 'icelandic', 'ig': 'igbo', 'id': 'indonesian', 'ga': 'irish', 'it': 'italian', 'ja': 'japanese', 'jw': 'javanese', 'kn': 'kannada', 'kk': 'kazakh', 'km': 'khmer', 'ko': 'korean', 'ku': 'kurdish (kurmanji)', 'ky': 'kyrgyz', 'lo': 'lao', 'la': 'latin', 'lv': 'latvian', 'lt': 'lithuanian', 'lb': 'luxembourgish', 'mk': 'macedonian', 'mg': 'malagasy', 'ms': 'malay', 'ml': 'malayalam', 'mt': 'maltese', 'mi': 'maori', 'mr': 'marathi', 'mn': 'mongolian', 'my': 'myanmar (burmese)', 'ne': 'nepali', 'no': 'norwegian', 'or': 'odia', 'ps': 'pashto', 'fa': 'persian', 'pl': 'polish', 'pt': 'portuguese', 'pa': 'punjabi', 'ro': 'romanian', 'ru': 'russian', 'sm': 'samoan', 'gd': 'scots gaelic', 'sr': 'serbian', 'st': 'sesotho', 'sn': 'shona', 'sd': 'sindhi', 'si': 'sinhala', 'sk': 'slovak', 'sl': 'slovenian', 'so': 'somali', 'es': 'spanish', 'su': 'sundanese', 'sw': 'swahili', 'sv': 'swedish', 'tg': 'tajik', 'ta': 'tamil', 'te': 'telugu', 'th': 'thai', 'tr': 'turkish', 'uk': 'ukrainian', 'ur': 'urdu', 'ug': 'uyghur', 'uz': 'uzbek', 'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu'}
 
+    langlist2 = {'af': 'afrikaans', 'sq': 'albanian', 'am': 'amharic', 'ar': 'arabic', 'hy': 'armenian', 'az': 'azerbaijani', 'eu': 'basque', 'be': 'belarusian', 'bn': 'bengali', 'bs': 'bosnian', 'bg': 'bulgarian', 'ca': 'catalan', 'ceb': 'cebuano', 'ny': 'chichewa', 'zh-cn': 'chinese (simplified)', 'zh-tw': 'chinese (traditional)', 'co': 'corsican', 'hr': 'croatian', 'cs': 'czech', 'da': 'danish', 'nl': 'dutch', 'en': 'english', 'eo': 'esperanto', 'et': 'estonian', 'tl': 'filipino', 'fi': 'finnish', 'fr': 'french', 'fy': 'frisian', 'gl': 'galician', 'ka': 'georgian', 'de': 'german', 'el': 'greek', 'gu': 'gujarati', 'ht': 'haitian creole', 'ha': 'hausa', 'haw': 'hawaiian', 'iw': 'hebrew', 'he': 'hebrew', 'hi': 'hindi', 'hmn': 'hmong', 'hu': 'hungarian', 'is': 'icelandic', 'ig': 'igbo', 'id': 'indonesian', 'ga': 'irish', 'it': 'italian', 'ja': 'japanese', 'jw': 'javanese', 'kn': 'kannada', 'kk': 'kazakh', 'km': 'khmer', 'ko': 'korean', 'ku': 'kurdish (kurmanji)', 'ky': 'kyrgyz', 'lo': 'lao', 'la': 'latin', 'lv': 'latvian', 'lt': 'lithuanian', 'lb': 'luxembourgish', 'mk': 'macedonian', 'mg': 'malagasy', 'ms': 'malay', 'ml': 'malayalam', 'mt': 'maltese', 'mi': 'maori', 'mr': 'marathi', 'mn': 'mongolian', 'my': 'myanmar (burmese)', 'ne': 'nepali', 'no': 'norwegian', 'or': 'odia', 'ps': 'pashto', 'fa': 'persian', 'pl': 'polish', 'pt': 'portuguese', 'pa': 'punjabi', 'ro': 'romanian', 'ru': 'russian', 'sm': 'samoan', 'gd': 'scots gaelic', 'sr': 'serbian', 'st': 'sesotho', 'sn': 'shona', 'sd': 'sindhi', 'si': 'sinhala', 'sk': 'slovak', 'sl': 'slovenian', 'so': 'somali', 'es': 'spanish', 'su': 'sundanese', 'sw': 'swahili', 'sv': 'swedish', 'tg': 'tajik', 'ta': 'tamil', 'te': 'telugu', 'th': 'thai', 'tr': 'turkish', 'uk': 'ukrainian', 'ur': 'urdu', 'ug': 'uyghur', 'uz': 'uzbek', 'vi': 'vietnamese', 'cy': 'welsh', 'xh': 'xhosa', 'yi': 'yiddish', 'yo': 'yoruba', 'zu': 'zulu'}
+
+
     languages = {value.title(): key for key, value in langlist.items()}
+
+
+    languages2 = {value.title(): key for key, value in langlist2.items()}
+
 
     options = [ft.dropdown.Option(text=language) for language in languages.keys()]
 
+
+    options2 = [ft.dropdown.Option(text=language) for language in languages2.keys()]
+
     dropLanguage = ft.Dropdown(
         label="Вибрати мову на яку перекладати",
-        options=options,
+        options=options2,
         on_change=SelectedLanguage,
     )
 
-    dropLanguage2 = ft.Dropdown(
+    dropLanguage_from = ft.Dropdown(
         label="Вибрати мову з якої перекладати",
         options=options,
-        on_change=SelectedLanguage2,
+        on_change=SelectedLanguageFrom,
     )
 
     def change(e):
         global selected_language
-        global selected_language2
+        global selected_language_from
+
+        if selected_language_from == 'auto':
+            selected_language_value = langlist[detect_language(lineMessage.value)].capitalize()
+            selected_language_from_value = langlist[selected_language].capitalize()
+
         lineTranslatevalue = lineTranslate.value
         lineMessagevalue = lineMessage.value
 
         lineTranslate.value = lineMessagevalue
         lineMessage.value = lineTranslatevalue
 
-        dropLanguagevalue = dropLanguage.value
-        dropLanguage2value = dropLanguage2.value
-
-        dropLanguage.value = dropLanguage2value
-
-        dropLanguage2.value = dropLanguagevalue
-
-        selected_languagevalue = selected_language
-        selected_languagevalue2 = selected_language2
-
-        selected_language = selected_languagevalue2
-        selected_language2 = selected_languagevalue
+        dropLanguage.value = selected_language_value
+        dropLanguage_from.value = selected_language_from_value
 
         page.update()
 
@@ -85,7 +88,8 @@ def main(page: ft.Page):
     page.add(ft.Row([
         lineMessage,
         lineTranslate,
-    ]), ft.Row([dropLanguage2, dropLanguage, btnChange]))
+    ]), ft.Row([dropLanguage_from, dropLanguage, btnChange]))
+
 
 #ft.app(target=main)
 ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
