@@ -4,6 +4,7 @@ from func_translator import translate_text, detect_language
 
 selected_language = ''
 selected_language_from = ''
+answer = ''
 
 def main(page: ft.Page):
     page.title = "PyTranslate"
@@ -37,6 +38,7 @@ def main(page: ft.Page):
             Translation(1)
 
     def Translation(e):
+        global answer
         if not lineMessage.value == '':
             if not selected_language == '':
                 if not selected_language_from == '':
@@ -131,6 +133,7 @@ def main(page: ft.Page):
 
                     page.update()
 
+
     if page.width < 600: # для мобілок
         lineTranslate = ft.TextField(label="Переклад", max_lines=5, read_only=True, min_lines=3, max_length=5000)
         lineMessage = ft.TextField(label="Введіть ваш текст", on_change=Translation, max_lines=5, min_lines=3, max_length=5000)
@@ -142,7 +145,6 @@ def main(page: ft.Page):
             on_change=SelectedLanguage,
             width=400,
         )
-
         dropLanguage_from = ft.Dropdown(
             label="Вибрати мову з якої перекладати",
             options=options,
