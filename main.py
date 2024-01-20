@@ -8,10 +8,12 @@ selected_language_from = ''
 def main(page: ft.Page):
     page.title = "PyTranslate"
 
-    page.theme = ft.Theme(
-        color_scheme=ft.ColorScheme(
-            primary=ft.colors.BLUE,
-        ),
+    page.appbar = ft.AppBar(
+        leading=ft.Container(padding=5, content=ft.Image(src=f"assets/favicon.png")),
+        leading_width=40,
+        title=ft.Text("PyTranslate"),
+        center_title=True,
+        bgcolor=ft.colors.INVERSE_PRIMARY,
     )
 
     def SelectedLanguage(e):
@@ -158,7 +160,5 @@ def main(page: ft.Page):
             lineTranslate,
         ]), ft.Row([dropLanguage_from, btnChange, dropLanguage], alignment=ft.MainAxisAlignment.CENTER))
 
-
-
 #ft.app(target=main)
-ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
+ft.app(target=main, view=None, assets_dir="assets", port=int(os.getenv("PORT", 8502)))
