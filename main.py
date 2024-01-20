@@ -2,8 +2,8 @@ import os
 import flet as ft
 from func_translator import translate_text, detect_language
 
-selected_language = 'English'
-selected_language_from = 'Визначити Мову'
+selected_language = ''
+selected_language_from = ''
 
 def main(page: ft.Page):
     page.title = "PyTranslate"
@@ -102,31 +102,33 @@ def main(page: ft.Page):
         global selected_language_from
 
         if not lineMessage.value == '':
-            if selected_language_from == 'auto':
-                selected_language_from = detect_language(lineMessage.value)
-                lineTranslatevalue = lineTranslate.value
-                lineMessagevalue = lineMessage.value
-
-                lineTranslate.value = lineMessagevalue
-                lineMessage.value = lineTranslatevalue
-
-                dropLanguage.value = langlist[selected_language_from].capitalize()
-                dropLanguage_from.value = langlist[selected_language].capitalize()
-
-            else:
-                lineTranslatevalue = lineTranslate.value
-                lineMessagevalue = lineMessage.value
-
-                dropLanguagevalue = dropLanguage.value
-                dropLanguage_fromvalue = dropLanguage_from.value
-
-                lineTranslate.value = lineMessagevalue
-                lineMessage.value = lineTranslatevalue
-
-                dropLanguage.value = dropLanguage_fromvalue
-                dropLanguage_from.value = dropLanguagevalue
-
-            page.update()
+            if not selected_language == '':
+                if not selected_language_from == '':
+                    if selected_language_from == 'auto':
+                        selected_language_from = detect_language(lineMessage.value)
+                        lineTranslatevalue = lineTranslate.value
+                        lineMessagevalue = lineMessage.value
+        
+                        lineTranslate.value = lineMessagevalue
+                        lineMessage.value = lineTranslatevalue
+        
+                        dropLanguage.value = langlist[selected_language_from].capitalize()
+                        dropLanguage_from.value = langlist[selected_language].capitalize()
+        
+                    else:
+                        lineTranslatevalue = lineTranslate.value
+                        lineMessagevalue = lineMessage.value
+        
+                        dropLanguagevalue = dropLanguage.value
+                        dropLanguage_fromvalue = dropLanguage_from.value
+        
+                        lineTranslate.value = lineMessagevalue
+                        lineMessage.value = lineTranslatevalue
+        
+                        dropLanguage.value = dropLanguage_fromvalue
+                        dropLanguage_from.value = dropLanguagevalue
+        
+                    page.update()
 
     if page.width < 600: # для мобілок
         lineTranslate = ft.TextField(label="Переклад", max_lines=5, read_only=True, min_lines=3)
@@ -138,8 +140,6 @@ def main(page: ft.Page):
             options=options2,
             on_change=SelectedLanguage,
             width=400,
-            value=selected_language,
-
         )
 
         dropLanguage_from = ft.Dropdown(
@@ -147,7 +147,6 @@ def main(page: ft.Page):
             options=options,
             on_change=SelectedLanguageFrom,
             width=400,
-            value=selected_language_from,
         )
 
         page.add(ft.Column([
@@ -165,7 +164,6 @@ def main(page: ft.Page):
             options=options2,
             on_change=SelectedLanguage,
             width=400,
-            value=selected_language,
         )
 
         dropLanguage_from = ft.Dropdown(
@@ -173,7 +171,6 @@ def main(page: ft.Page):
             options=options,
             on_change=SelectedLanguageFrom,
             width=400,
-            value=selected_language_from,
         )
 
         page.add(ft.Row([
