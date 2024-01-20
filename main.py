@@ -136,20 +136,20 @@ def main(page: ft.Page):
             label="Вибрати мову на яку перекладати",
             options=options2,
             on_change=SelectedLanguage,
-            width=896,
+            width=400,
         )
 
         dropLanguage_from = ft.Dropdown(
             label="Вибрати мову з якої перекладати",
             options=options,
             on_change=SelectedLanguageFrom,
-            width=896,
+            width=400,
         )
 
         page.add(ft.Row([
             lineMessage,
             lineTranslate,
-        ]), ft.Row([dropLanguage_from, btnChange, dropLanguage]))
-        
+        ]), ft.Row([dropLanguage_from, btnChange, dropLanguage], alignment=ft.MainAxisAlignment.CENTER))
+
 #ft.app(target=main)
 ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
