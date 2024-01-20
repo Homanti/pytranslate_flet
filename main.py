@@ -84,6 +84,7 @@ def main(page: ft.Page):
     options2 = [ft.dropdown.Option(text=language) for language in languages2.keys()]
 
     def change(e):
+
         if not lineMessage.value == '':
             global selected_language
             global selected_language_from
@@ -150,6 +151,8 @@ def main(page: ft.Page):
             lineMessage,
             lineTranslate,
         ]), ft.Row([dropLanguage_from, btnChange, dropLanguage], alignment=ft.MainAxisAlignment.CENTER))
+
+
 
 #ft.app(target=main)
 ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
