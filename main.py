@@ -98,23 +98,33 @@ def main(page: ft.Page):
     options2 = [ft.dropdown.Option(text=language) for language in languages2.keys()]
 
     def change(e):
+        global selected_language
+        global selected_language_from
 
         if not lineMessage.value == '':
-            global selected_language
-            global selected_language_from
-
             if selected_language_from == 'auto':
-                selected_language_value = langlist[detect_language(lineMessage.value)].capitalize()
-                selected_language_from_value = langlist[selected_language].capitalize()
+                selected_language_from = detect_language(lineMessage.value)
+                lineTranslatevalue = lineTranslate.value
+                lineMessagevalue = lineMessage.value
 
-            lineTranslatevalue = lineTranslate.value
-            lineMessagevalue = lineMessage.value
+                lineTranslate.value = lineMessagevalue
+                lineMessage.value = lineTranslatevalue
 
-            lineTranslate.value = lineMessagevalue
-            lineMessage.value = lineTranslatevalue
+                dropLanguage.value = langlist[selected_language_from].capitalize()
+                dropLanguage_from.value = langlist[selected_language].capitalize()
 
-            dropLanguage.value = selected_language_value
-            dropLanguage_from.value = selected_language_from_value
+            else:
+                lineTranslatevalue = lineTranslate.value
+                lineMessagevalue = lineMessage.value
+
+                dropLanguagevalue = dropLanguage.value
+                dropLanguage_fromvalue = dropLanguage_from.value
+
+                lineTranslate.value = lineMessagevalue
+                lineMessage.value = lineTranslatevalue
+
+                dropLanguage.value = dropLanguage_fromvalue
+                dropLanguage_from.value = dropLanguagevalue
 
             page.update()
 
