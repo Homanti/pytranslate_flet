@@ -1,5 +1,6 @@
 import flet as ft
 from func_translator import translate_text, detect_language
+import os
 
 selected_language = ''
 selected_language2 = ''
@@ -87,4 +88,4 @@ def main(page: ft.Page):
     ]), ft.Row([dropLanguage2, dropLanguage, btnChange]))
 
 #ft.app(target=main)
-ft.app(target=main,view=ft.WEB_BROWSER, port=8080)
+ft.app(target=main, view=None, port=int(os.getenv("PORT", 8502)))
