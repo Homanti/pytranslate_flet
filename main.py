@@ -1,9 +1,9 @@
+import os
 import flet as ft
 from func_translator import translate_text, detect_language
-import os
 
-selected_language = ''
-selected_language_from = ''
+selected_language = 'English'
+selected_language_from = 'Визначити Мову'
 
 def main(page: ft.Page):
     page.title = "PyTranslate"
@@ -138,6 +138,8 @@ def main(page: ft.Page):
             options=options2,
             on_change=SelectedLanguage,
             width=400,
+            value=selected_language,
+
         )
 
         dropLanguage_from = ft.Dropdown(
@@ -145,6 +147,7 @@ def main(page: ft.Page):
             options=options,
             on_change=SelectedLanguageFrom,
             width=400,
+            value=selected_language_from,
         )
 
         page.add(ft.Column([
@@ -162,6 +165,7 @@ def main(page: ft.Page):
             options=options2,
             on_change=SelectedLanguage,
             width=400,
+            value=selected_language,
         )
 
         dropLanguage_from = ft.Dropdown(
@@ -169,6 +173,7 @@ def main(page: ft.Page):
             options=options,
             on_change=SelectedLanguageFrom,
             width=400,
+            value=selected_language_from,
         )
 
         page.add(ft.Row([
@@ -178,3 +183,4 @@ def main(page: ft.Page):
 
 #ft.app(target=main)
 ft.app(target=main, view=None, assets_dir="assets", port=int(os.getenv("PORT", 8502)))
+#ft.app(target=main, view=ft.WEB_BROWSER, port=8080, assets_dir="assets")
