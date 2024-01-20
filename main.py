@@ -153,7 +153,7 @@ def main(page: ft.Page):
         page.add(ft.Column([
             lineMessage,
             lineTranslate,
-        ]), ft.Column([dropLanguage_from, btnChange, dropLanguage], alignment=ft.MainAxisAlignment.CENTER))
+        ]), ft.Row([dropLanguage_from]), ft.Row([btnChange], alignment=ft.MainAxisAlignment.END), ft.Row([dropLanguage]))
 
     else:
         lineTranslate = ft.TextField(label="Переклад", max_lines=5, expand=True, read_only=True, min_lines=3)
