@@ -16,6 +16,12 @@ def main(page: ft.Page):
         bgcolor=ft.colors.INVERSE_PRIMARY,
     )
 
+    page.theme = ft.Theme(
+        color_scheme=ft.ColorScheme(
+            primary=ft.colors.BLUE,
+        ),
+    )
+
     def SelectedLanguage(e):
         global selected_language
         selected_language_code = dropLanguage.value
