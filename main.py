@@ -182,5 +182,5 @@ def main(page: ft.Page):
         ]), ft.Row([dropLanguage_from, btnChange, dropLanguage], alignment=ft.MainAxisAlignment.CENTER))
 
 #ft.app(target=main)
-ft.app(target=main, view=None, assets_dir="assets", port=int(os.getenv("PORT", 8502)))
+#ft.app(target=main, view=None, assets_dir="assets", port=int(os.getenv("PORT", 8502)))
 #ft.app(target=main, view=ft.WEB_BROWSER, port=8080, assets_dir="assets")
